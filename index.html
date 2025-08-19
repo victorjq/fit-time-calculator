@@ -1,20 +1,162 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fit Time Calculator</title>
-    <link rel="stylesheet" href="assets/css/main.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fit Time Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-    <header>
-        <h1>Fit Time Calculator</h1>
-    </header>
-    <main>
-        <!-- Content goes here -->
-    </main>
-    <footer>
-        <p>&copy; 2025 Fit Time Calculator</p>
-    </footer>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="#top">FitTime</a>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#calculator">Calculator</a></li>
+        <li><a href="#how">How it works</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell">
+        <h1>How long to reach your goal?</h1>
+        <p class="lead">A light, friendly calculator that estimates a safe timeline for common fitness goals.</p>
+        <a href="#calculator" class="btn">Try the calculator</a>
+        <svg class="doodle" viewBox="0 0 400 60" aria-hidden="true">
+          <path d="M5 40c40-30 80-30 120 0s80 30 120 0 80-30 120 0" fill="none" vector-effect="non-scaling-stroke"/>
+        </svg>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="shell">
+        <h2>About</h2>
+        <p>This single page uses plain HTML, CSS, and a little JavaScript. It keeps things kind, simple, and clear.</p>
+        <ul class="pill-list">
+          <li>Cartoonish accents</li>
+          <li>Smooth anchor navigation</li>
+          <li>No frameworks</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="calculator" class="app">
+      <div class="shell">
+        <h2>Fit Time Calculator</h2>
+        <div class="app-grid">
+          <form id="fit-form" class="card">
+            <fieldset class="grid">
+              <label>
+                <span>Sex</span>
+                <select name="sex" required>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Age</span>
+                <input type="number" name="age" min="10" max="100" value="30" required />
+              </label>
+
+              <label>
+                <span>Height (cm)</span>
+                <input type="number" name="height" min="120" max="230" value="175" required />
+              </label>
+
+              <label>
+                <span>Weight (kg)</span>
+                <input type="number" name="weight" min="35" max="250" value="80" required />
+              </label>
+
+              <label>
+                <span>Activity</span>
+                <select name="activity" required>
+                  <option value="1.2">Sedentary</option>
+                  <option value="1.375">Light</option>
+                  <option value="1.55" selected>Moderate</option>
+                  <option value="1.725">Active</option>
+                  <option value="1.9">Very active</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Goal</span>
+                <select name="goal" id="goal">
+                  <option value="fatloss">Fat loss</option>
+                  <option value="musclegain">Muscle gain</option>
+                  <option value="run5k">5k time</option>
+                </select>
+              </label>
+
+              <label data-goal="fatloss">
+                <span>Goal weight (kg)</span>
+                <input type="number" name="goalWeight" min="35" max="250" value="72" />
+              </label>
+
+              <label data-goal="musclegain" class="hide">
+                <span>Target gain (kg)</span>
+                <input type="number" name="gainKg" min="0.5" max="15" step="0.1" value="3" />
+              </label>
+
+              <label data-goal="run5k" class="hide">
+                <span>Improve by (%)</span>
+                <input type="number" name="improvePct" min="1" max="20" step="0.5" value="5" />
+              </label>
+
+              <label>
+                <span>Preset</span>
+                <select name="preset" id="preset">
+                  <option value="custom">Custom</option>
+                  <option value="power">Action Hero</option>
+                  <option value="lean">Lean Athlete</option>
+                  <option value="starter">Starter Recomp</option>
+                </select>
+              </label>
+            </fieldset>
+
+            <div class="actions">
+              <button type="submit" class="btn">Estimate time</button>
+              <button type="button" id="reset" class="btn btn-ghost">Reset</button>
+            </div>
+            <p class="note">Educational only. Not medical advice.</p>
+          </form>
+
+          <div class="card result">
+            <h3>Estimated timeline</h3>
+            <div id="resultText" class="big">Fill the form</div>
+            <ul class="facts" id="facts"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <div class="shell">
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li>BMR via Mifflin St Jeor</li>
+          <li>TDEE by activity level</li>
+          <li>Fat loss: safe weekly loss capped</li>
+          <li>Muscle gain: rate by experience</li>
+          <li>5k: map improvement to weeks</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <p>Built with HTML, CSS, and JS. Deployed on GitHub Pages.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/script.js"></script>
 </body>
 </html>

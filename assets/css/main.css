@@ -1,27 +1,111 @@
-/* Basic CSS parameters for the website */
+/* Brand palette: Sky #6CC6FF, Mint #B8F2E1, Coral #FFB4A2 */
+:root{
+  --sky:#6CC6FF;
+  --mint:#B8F2E1;
+  --coral:#FFB4A2;
+  --ink:#232629;
+  --paper:#FBFEFF;
+  --maxw:1200px;
+  --radius:20px;
 
-:root {
-  --primary-color: #2d8cff;
-  --secondary-color: #f5f5f5;
-  --font-family: 'Segoe UI', Arial, sans-serif;
-  --text-color: #222;
+  /* Fluid type and spacing without media queries */
+  --step-0: clamp(1rem, 0.9rem + 0.3vw, 1.125rem);
+  --step-1: clamp(1.25rem, 1.1rem + 0.7vw, 1.75rem);
+  --step-2: clamp(1.6rem, 1.3rem + 1.4vw, 2.4rem);
+  --gap: clamp(12px, 2vw, 24px);
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-family);
-  background: var(--secondary-color);
-  color: var(--text-color);
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font:400 var(--step-0)/1.6 Nunito, system-ui, Arial;
+  color:var(--ink); background:var(--paper);
 }
 
-header, footer {
-  background: var(--primary-color);
-  color: #fff;
-  padding: 1rem;
-  text-align: center;
+.shell{
+  width:min(var(--maxw), 100% - 2rem);
+  margin-inline:auto;
 }
 
-main {
-  padding: 2rem;
+.site-header{
+  position:sticky; top:0; z-index:10; background:rgba(255,255,255,.9);
+  backdrop-filter:saturate(140%) blur(6px);
+  border-bottom:2px dashed color-mix(in oklab, var(--sky), black 10%);
+}
+
+.nav{display:flex; align-items:center; justify-content:space-between; padding:10px 0}
+.brand{
+  font:600 var(--step-1)/1 Fredoka, system-ui; color:var(--ink); text-decoration:none;
+  padding:.2rem .6rem; background:var(--mint); border-radius:9999px;
+  box-shadow:2px 2px 0 0 color-mix(in oklab, var(--mint), black 20%);
+}
+.nav-toggle{display:none}
+.nav-links{display:flex; gap:16px; list-style:none; margin:0; padding:0}
+.nav a{color:var(--ink); text-decoration:none; padding:.4rem .7rem; border-radius:9999px}
+.nav a:hover{background:var(--sky); box-shadow:2px 2px 0 0 color-mix(in oklab, var(--sky), black 20%)}
+
+.hero{
+  background:
+    radial-gradient(1200px 1200px at 10% -20%, var(--mint) 0 35%, transparent 36%),
+    radial-gradient(1000px 1000px at 110% 10%, var(--sky) 0 35%, transparent 36%),
+    linear-gradient(#fff,#fff);
+  padding: clamp(40px, 8vw, 100px) 0;
+  text-align:center;
+}
+.hero h1{font:600 var(--step-2)/1.2 Fredoka, system-ui; margin:0 0 10px}
+.lead{margin:0 auto var(--gap); max-width:60ch}
+.btn{
+  display:inline-block; border:2px solid currentColor; padding:.6rem 1rem; border-radius:9999px;
+  background:var(--coral); color:#222; font-weight:700; text-decoration:none;
+  box-shadow:3px 3px 0 0 color-mix(in oklab, var(--coral), black 20%);
+}
+.btn:hover{transform:translate(-1px,-1px)}
+.btn-ghost{background:transparent; border-color:var(--ink)}
+
+.doodle path{stroke:var(--ink); stroke-width:4; stroke-linecap:round}
+.doodle{width:min(90%, 420px); margin:24px auto 0; display:block; filter:drop-shadow(2px 2px 0 color-mix(in oklab, var(--ink), white 50%))}
+
+.about,.how{padding: clamp(40px, 6vw, 80px) 0}
+.pill-list{display:flex; flex-wrap:wrap; gap:10px; padding:0; list-style:none}
+.pill-list li{background:#fff; border:2px dashed var(--ink); padding:.4rem .8rem; border-radius:9999px}
+
+.app{padding: clamp(40px, 6vw, 80px) 0; background:linear-gradient(#fff, color-mix(in oklab, var(--mint), white 60%))}
+.app-grid{display:grid; gap:var(--gap); grid-template-columns: minmax(0,1fr);}
+
+.card{
+  background:#fff; border:2px solid var(--ink); border-radius:var(--radius);
+  box-shadow:6px 6px 0 0 color-mix(in oklab, var(--ink), white 70%);
+  padding:clamp(16px, 3vw, 24px);
+}
+.card h3{margin:0 0 8px}
+
+.grid{
+  display:grid; gap:12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  border:0; margin:0; padding:0;
+}
+label{display:grid; gap:6px; font-weight:700}
+input,select,button{font:inherit}
+input,select{
+  padding:.6rem .7rem; border:2px solid var(--ink); border-radius:12px; background:#fff;
+}
+.actions{display:flex; gap:10px; margin-top:10px; flex-wrap:wrap}
+.note{opacity:.7; font-size:.9em; margin-top:6px}
+
+.result .big{font:600 var(--step-1)/1.3 Fredoka, system-ui}
+.facts{margin:.4rem 0 0; padding-left:1rem}
+
+.steps{display:grid; gap:.5rem; padding-left:1.2rem}
+
+.site-footer{padding:24px 0; text-align:center; border-top:2px dashed color-mix(in oklab, var(--sky), black 10%)}
+
+/* Layout grows to two columns automatically when wide enough via auto-fit; no media query needed */
+.app-grid{grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));}
+
+/* tiny helper */
+.hide{display:none}
+
+/* Respect motion preferences */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important; transition:none!important}
 }
