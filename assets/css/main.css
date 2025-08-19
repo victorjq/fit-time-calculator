@@ -105,6 +105,55 @@ input,select{
 /* tiny helper */
 .hide{display:none}
 
+
+.how .shell { max-width: var(--maxw); }
+
+.how-grid{
+  display:grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  align-items: stretch;
+}
+
+.how-card{
+  padding: clamp(16px, 3vw, 24px);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 6px 6px 0 0 color-mix(in oklab, var(--ink), white 70%);
+  background: #fff;
+}
+
+.how-card h3{ margin: 0 0 .4rem; font: 600 var(--step-1)/1.2 Fredoka, system-ui; }
+.how-card p { margin: 0; }
+
+/* Colorful variants using brand tones */
+.how-a{ background: color-mix(in oklab, var(--mint), white 70%); }
+.how-b{ background: color-mix(in oklab, var(--sky),  white 70%); }
+.how-c{ background: color-mix(in oklab, var(--coral), white 70%); }
+.how-d{ background: color-mix(in oklab, var(--mint),  var(--sky) 30%); }
+
+
+.site-footer {
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  padding: 20px;
+  margin-top: 60px;
+  font-size: 0.9rem;
+  border-top: 3px solid var(--sky);
+}
+
+.site-footer a {
+  color: var(--sky);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+
 /* Respect motion preferences */
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important; transition:none!important}
